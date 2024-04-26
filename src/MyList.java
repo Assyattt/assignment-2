@@ -1,4 +1,4 @@
-public interface MyList<T> extends Iterable<T>{
+public interface MyList<T extends Comparable<T>> extends Iterable<T>{
     void add(T item);
     void set(int index, T item);
     void add(int index, T item);
