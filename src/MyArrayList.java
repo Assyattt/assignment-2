@@ -6,11 +6,32 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
     private int size;
 
     public MyArrayList() {
-        arr = (T[]) new Object[5];
+        arr = (T[]) new Comparable[5];
         size = 0;
     }
 
-    public void set(int index, Object item){
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator<T>{
+        int cursor = 0;
+        @Override
+        public boolean hasNext() {
+            return cursor < size && cursor >= 0;
+        }
+
+        @Override
+        public T next() {
+            T newItem = arr[cursor];
+            cursor++;
+            return newItem;
+        }
+    }
+
+    @Override
+    public void set(int index, T item) {
         checkIndex(index);
         arr[index] = (T) item;
     }
@@ -21,11 +42,6 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         arr[size++] = (T) element;
     }
 
-    @Override
-    public void set(int index, T item) {
-
-    }
-
     public void add(int index, T element) {
         if(size>=arr.length)
             increaseBuffer();
@@ -33,26 +49,22 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         arr[index] = element;
     }
 
-    @Override
-    public void addFirst(T item) {
-
-    }
-
-    public void addFirst(Object item){
+    public void addFirst(T item){
         if(size>=arr.length)
             increaseBuffer();
-        for(int i = size; i >= 0; i--){
+        for(int i = size; i >= 1; i--){
             arr[i] = arr[i-1];
         }
         arr[0] = (T) item;
         size++;
     }
+
     public void addLast(T item){
         add(item);
     }
 
     private void increaseBuffer() {
-        T[] newArr = (T[]) new Object[arr.length*2];
+        T[] newArr = (T[]) new Comparable[arr.length*2];
         for (int i = 0; i < arr.length; i++) {
             newArr[i] = arr[i];  //copy each element from old to new
         }
@@ -110,7 +122,6 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
                     T temp = arr[j];
                     arr[j]=arr[i];
                     arr[i]=temp;
-                    break;
                 }
             }
         }
@@ -118,35 +129,35 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
 
     public int indexOf(Object item){
         for(int i=0; i < size; i++)
-            if(arr[i]==item) return i;
+            if(arr[i].compareTo((T) item) == 0) return i;
         throw new NoSuchElementException("there is no such object");
     }
 
     public int lastIndexOf(Object item){
-        int result = -1;
-        for(int i=0; i < size; i++)
-            if(arr[i]==item) result = i;
-        if(result==-1) throw new NoSuchElementException("there is no such object");
-        return result;
+        for(int i=size-1; i >= 0; i--)
+            if(arr[i].compareTo((T) item) == 0) return i;
+        throw new NoSuchElementException("there is no such object");
     }
 
     public boolean exists(Object item){
         for(int i=0; i < size; i++)
-            if(arr[i]==item) return true;
+            if(arr[i].compareTo((T) item) == 0) return true;
         return false;
     }
 
-    public Object[] toArray(){
+    public T[] toArray(){
         return (T[]) arr;
     }
 
     public void clear() {
-        arr =  (T[]) new Object[5];
+        arr =  (T[]) new Comparable[5];
         size = 0;
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        return null;
+    public void print(){
+        for(int i = 0; i < size; i++){
+            System.out.print(arr[i] + " ");
+        }
+        System.out.print("\n");
     }
 }

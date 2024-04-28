@@ -14,7 +14,8 @@ public interface MyList<T extends Comparable<T>> extends Iterable<T>{
     int indexOf(Object object);
     int lastIndexOf(Object object);
     boolean exists(Object object);
-    public Object[] toArray();
+    T[] toArray();
     void clear();
     int size();
+    void print();
 }
