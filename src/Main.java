@@ -1,34 +1,33 @@
 public class Main {
     public static void main(String[] args) {
-        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        MyMinHeap<Integer> myMinHeap = new MyMinHeap<>();
 
-        myArrayList.add(1);
-        myArrayList.add(111);
-        myArrayList.add(3);
-        myArrayList.add(4);
-        myArrayList.add(5);
-        myArrayList.add(136345);
-        myArrayList.add(7);
+        myMinHeap.insert(136345);
+        myMinHeap.insert(111);
+        myMinHeap.insert(3);
+        myMinHeap.insert(4);
+        myMinHeap.insert(5);
+        myMinHeap.insert(1);
+        myMinHeap.insert(7);
 
-        myArrayList.add(146);
-        myArrayList.add(-0);
-        myArrayList.add(-0);
-        myArrayList.add(136345);
-        myArrayList.add(34);
-
+        myMinHeap.print();
+        myMinHeap.set(1,164);
+        myMinHeap.print();
+        myMinHeap.heapify(1     );
+        myMinHeap.print();
 
 //       System.out.print( myLinkedList.exists(-2));
 //        Object[] arr = myArrayList.toArray()
-
-        myArrayList.print();
-        myArrayList.clear();
-        myArrayList.print();
-        myArrayList.add(1);
-        myArrayList.add(2);
-        myArrayList.add(3);
-        myArrayList.add(4);
-        myArrayList.add(5);
-        myArrayList.print();
+//
+//        myArrayList.print();
+//        myArrayList.clear();
+//        myArrayList.print();
+//        myArrayList.add(1);
+//        myArrayList.add(2);
+//        myArrayList.add(3);
+//        myArrayList.print();
+//        myArrayList.add(4);
+//        myArrayList.add(5);
 
 //        System.out.println("Value of index 3: " + myArrayList.get(3));
 //        System.out.println("Size of an list: " + myArrayList.size());

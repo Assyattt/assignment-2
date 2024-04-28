@@ -2,14 +2,13 @@ public class MyMinHeap<T extends Comparable<T>> extends MyArrayList<T> {
 
     public MyMinHeap(){
         super();
-        set(0,null);
     }
     public boolean empty(){
-        return iterator().hasNext();
+        return !iterator().hasNext();
     }
-
     public void insert(T item){
-        add(item);
+        if (empty()) add(item);
+         add(item);
         traversUp(size()-1);
     }
     public T extractMin(){
@@ -22,20 +21,21 @@ public class MyMinHeap<T extends Comparable<T>> extends MyArrayList<T> {
     public T getMin(){
         return get(1);
     }
-    private void heapify(int index){
+    public void heapify(int index){
         checkIndex(index);
-        if(!existsIndex(index*2)) return;
+        if(!existsIndex(index*2))
+            return;
         if (existsIndex(rightChildOf(index)) && get(rightChildOf(index)).compareTo( (T) get(leftChildOf(index)) ) < 0 &&
                 get(index).compareTo(get(rightChildOf(index))) > 0) {
             swap(index, rightChildOf(index));
             heapify(rightChildOf(index));
         } else if (get(index).compareTo(get(leftChildOf(index))) > 0){
-            swap(index, rightChildOf(index));
-            heapify(rightChildOf(index));
+            swap(index, leftChildOf(index));
+            heapify(leftChildOf(index));
         }
     }
     private void traversUp(int index){
-        while(index>1 || get(index).compareTo( (T)get(index/2) ) < 0) {
+        while(index>1 && get(index).compareTo( (T)get(index/2) ) < 0) {
             swap(index, index/2);
             index = index / 2;
         }
