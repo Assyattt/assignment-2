@@ -42,6 +42,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         }
     }
 
+    // Replaces the element at the specified index in the array with the specified element.
+// Checks if the given index is zero if so assign the given parameter to Node reference head
+// otherwise iterates through linked list by loop to index and replace the element.s
+// Throws an IndexOutOfBoundsException if the index is out of range.
+// Time complexity: O(n)
     @Override
     public void set(int index, T item) {
         checkIndex(index);
@@ -57,6 +62,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         }
     }
 
+//     Adds the specified element to the end of the array list.
+//      If the array list is empty, the new element becomes both the head and the tail.
+//      Otherwise, the new element is appended to the end of the list, and the tail is updated.
+//      Increase the size of the array list
+//      Time complexity: O(1)
     public void add(T item){
         MyNode<T> newNode = new MyNode<>(item);
         if(head == null){
@@ -72,11 +82,19 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size++;
     }
 
+//     Checks if the given index is within the bounds of the array list.
+//      Throws an IndexOutOfBoundsException if the index is less than 0 or greater than or equal to the size of the array list.
     private void checkIndex(int index) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException("index not correct");
     }
 
+//      Inserts the specified element at the specified position in the array list.
+//      If the index is 0, insert the new element at the beginning of the list
+//      If the index is not 0, iterate through the list to find the position to insert the new element.
+//      Insert the new node between currentNode and currentNode.next
+//      Throws an IndexOutOfBoundsException if the index is out of range.
+//      Time complexity: O(n)
     @Override
     public void add(int index, T item){
         MyNode<T> newNode= new MyNode<>(item);
@@ -100,6 +118,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         }
     }
 
+//     Inserts the specified element at the beginning of the array list.
+//     If the array list is empty, set both the head and tail to the new node
+//     If the current head is not null, set its previous pointer to the new node
+//     Update the head to be the new node
+//     Increase the size of the array list.
+//     Time complexity: O(1)
     @Override
     public void addFirst(T item){
         MyNode<T> newNode = new MyNode<>(item);
@@ -113,11 +137,16 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size++;
     }
 
+// Inserts the specified element at the end of the array list.
+// Time complexity: O(n)
     @Override
     public void addLast(T item){
         add(item);
     }
 
+    // Returns the element at the specified index in the array list.
+// Throws an IndexOutOfBoundsException if the index is out of range.
+// Time complexity: O(n)
     @Override
     public T get(int index){
         checkIndex(index);
@@ -128,18 +157,36 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return currentNode.data;
     }
 
+    // Returns the first element of the array list.
+// Throws an IndexOutOfBoundsException if the array list is empty.
+// Check if the array list is empty
+// Return the data of the head node
+// Time complexity: O(1)
     @Override
     public T getFirst(){
         checkIndex(0);
         return head.data;
     }
 
+    // Returns the last element of the array list.
+// Throws an IndexOutOfBoundsException if the array list is empty.
+// Check if the array list is empty
+// Return the data of the tail node
+// Time complexity: O(1)
     @Override
     public T getLast(){
         checkIndex(0);
         return tail.data;
     }
 
+    // Removes the element at the specified index in the array list.
+    // Check if the index is valid
+    // If the index is 0, remove the first element
+    // Find the node before the node to be removed
+    // Remove the node at the specified index by updating pointers
+    // Decrease the size of the array list
+// Throws an IndexOutOfBoundsException if the index is out of range.
+// Time complexity: O(n)
     @Override
     public void remove(int index){
         checkIndex(index);
@@ -163,6 +210,13 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size--;
     }
 
+    // Removes the first element of the array list.
+    // Check if the array list is empty
+    // Update the head to point to the next node
+    // If the new head is not null, set its previous pointer to null
+    // Decrease the size of the array list
+// Throws an IndexOutOfBoundsException if the array list is empty.
+// Time complexity: O(1)
     public void removeLast(){
         checkIndex(0);
         tail=tail.prev;
@@ -170,6 +224,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size--;
     }
 
+    // Sorts the elements of the array list in ascending order using the compareTo method.
+    // Iterate through the list from the tail to the head
+    // Start from the current node and compare it with all previous nodes
+    // Swap the data of the current node and the current node1 if the data of current node1 is greater
+// Time complexity: O(n^2)
     public void sort(){
         MyNode<T> currentNode = tail;
         while(currentNode != null){
@@ -186,6 +245,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         }
     }
 
+    // Returns the index of the first occurrence of the specified element in the array list, or -1 if the element is not found.
+    // Iterate through the list
+    // Compare the data of the current node with the specified object
+    // If the data matches, return the current index
+    // If the element is not found, return -1
+// Time complexity: O(n)
     @Override
     public int indexOf(Object object) {
         MyNode<T> currentNode = head;
@@ -200,6 +265,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return -1;
     }
 
+    // Returns the index of the last occurrence of the specified element in the array list, or -1 if the element is not found.
+    // Iterate through the list from the tail to the head
+    // Compare the data of the current node with the specified object
+    // If the data matches, return the current index
+    // If the element is not found, return -1
+    // Time complexity: O(n)
     @Override
     public int lastIndexOf(Object object) {
         MyNode<T> currentNode = tail;
@@ -214,11 +285,19 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return -1;
     }
 
+    // Returns true if the specified element exists in the array list, false otherwise.
+    // Check if the last index of the element is not -1, indicating whether it absents in the list
+    // Time complexity: O(n)
     @Override
     public boolean exists(Object object) {
         return lastIndexOf(object) != -1;
     }
 
+    // Returns an array containing all of the elements in the array list in the same order as they appear.
+    // Create a new array with the same size as the linked list
+    // Iterate through the list and copy elements to the new array
+    // Return the new array
+    // Time complexity: O(n)
     @Override
     public T[] toArray() {
         T[] newArr = (T[]) new Comparable[size];
@@ -232,6 +311,9 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return newArr;
     }
 
+    // Removes all elements from the array list.
+    // Set both the head and tail to null, and reset the size to 0
+    // Time complexity: O(1)
     @Override
     public void clear() {
         head = null;
@@ -239,11 +321,18 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size = 0;
     }
 
+    // Returns the number of elements in the array list.
+    // Simply return the size variable
+    // Time complexity: O(1)
     @Override
     public int size() {
         return size;
     }
 
+    // Prints all elements currently stored in the array list, separated by spaces, and ends with a newline character.
+    // Iterate through the list and print each element followed by a space
+    // Print the last element followed by a newline character
+    // Time complexity: O(n)
     @Override
     public void print(){
         MyNode<T> currentNode = head;

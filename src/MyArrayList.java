@@ -93,8 +93,9 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
     }
 
 //    This method increase capacity of array by creating new instance of array with length of array bigger and copy all elements into it.
-//The asymptotically time complexty of method is O(n) since it may iterates through all elemets from the end to the given index
-    //    resulting in the linear time complexity.
+//    The asymptotically time complexty of method is O(n) since it may iterates through all elemets from the end to the given index
+//    resulting in the linear time complexity.
+//    Time complexity: O(n)
     private void increaseBuffer() {
         T[] newArr = (T[]) new Comparable[arr.length*2];
         for (int i = 0; i < arr.length; i++) {
@@ -102,7 +103,9 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         }
         arr = newArr; //change reference of arr from old memory location to new
     }
-
+//    Retrieves the element at the specified index in the array.
+//    Throws an IndexOutOfBoundsException if the index is out of range.
+//    Time complexity: O(1)
     public T get(int index){
         checkIndex(index);
         return arr[index];
@@ -112,25 +115,37 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         return arr[0];
     }
 
+    // Retrieves the first element of the array.
+// Time complexity: O(1)
     public T getLast(){
         return arr[size-1];
     }
 
+    // Checks if the given index is within the bounds of the array.
+// Throws an IndexOutOfBoundsException if the index is less than 0 or greater than or equal to the size of the array.
     private void checkIndex(int index) {
         if(index < 0 || index >= size)
             throw new IndexOutOfBoundsException("index not correct");
     }
 
+    // Returns the number of elements currently stored in the array.
+// Time complexity: O(1)
     public int size(){
         return size;
     }
 
+    // Prints all elements currently stored in the array.
+// Time complexity: O(n)
     public void printArr(){
         for (int i = 0; i < size; i++) {
             System.out.print(arr[i] + " ");
         }
     }
 
+    // Removes the element at the specified index in the array.
+// After removing move all elements on the left of removed elements to the left and subtract 1 from size
+// Throws an IndexOutOfBoundsException if the index is out of range.
+// Time complexity: O(n)
     public void remove(int index) {
         checkIndex(index);
         for (int i = index + 1; i < size; i++) {
@@ -139,14 +154,22 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         size--;
     }
 
+    // Removes the first element of the array.
+// Time complexity: O(n)
     public void removeFirst(){
         remove(0);
     }
 
+    // Removes the last element of the array.
+// Time complexity: O(1)
     public void removeLast(){
         remove(size-1);
     }
 
+    // Sorts the elements of the array in ascending order using the compareTo method.
+// It uses double loop, first loop fix the higher bounds of sorting i,
+// second compare each element j below bound with the highest element i and swap them if j is greater than i.
+// Time complexity: O(n^2)
     public void sort(){
         for (int i = size-1; i>=0; i--){
             for (int j=i; j>=0; j--){
@@ -159,33 +182,48 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>{
         }
     }
 
+    // Returns the index of the first occurrence of the specified element in the array, or -1 if the element is not found.
+// Use loop going through all elements from th beginning of array.
+// Time complexity: O(n)
     public int indexOf(Object item){
         for(int i=0; i < size; i++)
             if(arr[i].compareTo((T) item) == 0) return i;
         throw new NoSuchElementException("there is no such object");
     }
 
+    // Returns the index of the last occurrence of the specified element in the array, or -1 if the element is not found.
+    // Use loop going through all elements from the end of array.
+    // Time complexity: O(n)
     public int lastIndexOf(Object item){
         for(int i=size-1; i >= 0; i--)
             if(arr[i].compareTo((T) item) == 0) return i;
         throw new NoSuchElementException("there is no such object");
     }
 
+    // Returns true if the specified element exists in the array, false otherwise.
+// Use loop going through all elements from th beginning of array.
+// Time complexity: O(n)
     public boolean exists(Object item){
         for(int i=0; i < size; i++)
             if(arr[i].compareTo((T) item) == 0) return true;
         return false;
     }
-
+    // Returns an array containing all of the elements in this array list in the same order as they appear.
+// Time complexity: O(1)
     public T[] toArray(){
         return (T[]) arr;
     }
 
+    // Removes all of the elements from this array list.
+// Time complexity: O(1)
     public void clear() {
         arr =  (T[]) new Comparable[5];
         size = 0;
     }
 
+    // Prints all elements currently stored in the array, separated by spaces.
+    // Use loop going through all elements from th beginning of array.
+    // Time complexity: O(n)
     public void print(){
         for(int i = 0; i < size; i++){
             System.out.print(arr[i] + " ");
